@@ -28,8 +28,8 @@ def record_audio():
 
     # Start recording
     for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-	data = stream.read(CHUNK)
-	frames.append(data)
+        data = stream.read(CHUNK)
+        frames.append(data)
 
     print("Finished recording.")
 
@@ -57,9 +57,7 @@ if __name__ == "__main__":
 
     # Your main program continues to run from here
     print("Welcome to Swaraarth.")
-    print("Press "b" to record "SA" and generate your original singing scale.")
+    print("Press b to record sa and generate your original singing scale.")
     # Example of main program doing other things
-    while True:
-        pass  # Replace pass with your code
 
 
