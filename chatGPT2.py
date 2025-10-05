@@ -2,9 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io.wavfile as wav
 from scipy.signal import stft
+import scipy
 
 # Load audio file
-file_path = "output_alankara.wav"
+file_path = "output_Sa.wav"
 sample_rate, data = wav.read(file_path)
 
 # If stereo, take one channel
@@ -15,8 +16,11 @@ if len(data.shape) > 1:
 if np.issubdtype(data.dtype, np.integer):
     data = data / np.iinfo(data.dtype).max
 
+sos = scipy.signal.butter(4, 50, btype='highpass', fs=sample_rate, output='sos')  # cutoff freq 50 Hz
+y_filtered = scipy.signal.sosfilt(sos, data)
+
 # Compute STFT
-f, t, Zxx = stft(data, fs=sample_rate, nperseg=2048, noverlap=1024)
+f, t, Zxx = stft(y_filtered, fs=sample_rate, nperseg=2048, noverlap=1024)
 magnitude = np.abs(Zxx)
 
 # Find dominant frequency at each time frame

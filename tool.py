@@ -9,7 +9,7 @@ CHANNELS = 1              # Single channel for microphone
 RATE = 44100              # Sample rate
 CHUNK = 1024              # Block size
 RECORD_SECONDS = 5        # Duration of recording
-WAVE_OUTPUT_FILENAME = "output.wav"  # Output file
+WAVE_OUTPUT_FILENAME = "output_Do.wav"  # Output file
 
 def record_audio():
 
@@ -22,7 +22,7 @@ def record_audio():
 		input=True,
 		frames_per_buffer=CHUNK)
 
-    print("Recording SA")
+    print("Recording DO")
 
     frames = []
 

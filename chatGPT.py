@@ -1,10 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io.wavfile as wav
+import sys
 from scipy.fft import fft, fftfreq
+np.set_printoptions(threshold=sys.maxsize)
 
 # Load the audio file
-file_path = "output_alankara.wav"
+file_path = "output_Sa.wav"
 sample_rate, data = wav.read(file_path)
 
 # If stereo, take one channel
@@ -25,9 +27,12 @@ idx = np.where(xf >= 0)
 xf = xf[idx]
 yf = np.abs(yf[idx])
 
+print(yf)
+
 # Find dominant frequencies
 threshold = np.max(yf) * 0.1   # only keep frequencies with >10% of max amplitude
 dominant_freqs = xf[yf > threshold]
+#print(dominant_freqs)
 
 # Plot spectrum
 plt.figure(figsize=(12, 6))
