@@ -10,6 +10,7 @@ import scipy.signal as signal
 
 FRAME_SIZE = 2048
 HOP_LENGTH = 512
+file_path = "/home/shraddha/Documents/Recurse/Swaraarth/audio/alankara.wav"
 
 # 1. High-pass filter (removes DC and slow varying offset)
 def highpass_filter(data, fs, cutoff=20, order=5):
@@ -27,7 +28,7 @@ def plot_spectrogram(Y, sr, hop_length, y_axis='linear'):
 
 
 # Load audio (automatically converts to float32)
-y, sr = librosa.load('Sagar_alankara.wav', sr=48000)
+y, sr = librosa.load(file_path, sr=48000)
 y_stft = librosa.stft(y=y, n_fft=FRAME_SIZE, hop_length=HOP_LENGTH)
 
 #Calculating the Spectrogram
@@ -35,54 +36,7 @@ y_spec = np.abs(y_stft) ** 2
 y_spec.shape
 y_log = librosa.power_to_db(y_spec)
 
-#plot_spectrogram(y_log, sr=sr, hop_length=HOP_LENGTH, y_axis='log')
-
-#import cv2
-#import numpy as np
-#
-#img = cv2.imread('Screenshot from 2025-10-07 14-48-57.jpg')
-#gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-#_, binary = cv2.threshold(gray, 80, 255, cv2.THRESH_BINARY)
-#
-#for row in range(binary.shape[0]):
-#    band = binary[row, :]
-#    starts = np.where(np.diff((band > 0).astype(int)) == 1)[0]
-#    ends = np.where(np.diff((band > 0).astype(int)) == -1)[0]
-#    # Store or plot the start/end indices
-#
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+plot_spectrogram(y_log, sr=sr, hop_length=HOP_LENGTH, y_axis='log')
 
 
 y = y - np.mean(y)
@@ -109,7 +63,8 @@ plt.vlines(onset_times, -1, 1, color='r', linestyle='--', label="Onsets")
 plt.title("Detected Onsets")
 plt.legend()
 plt.show()
-#
+
+
 #plt.figure(figsize=(14, 5))
 #plt.plot(librosa.times_like(onset_env, sr=sr), onset_env)
 #plt.title('Onset Envelope')
